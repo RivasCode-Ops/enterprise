@@ -1,0 +1,43 @@
+# Referência para VPS (ex.: DigitalOcean): PostgreSQL + Redis na rede interna.
+# Acrescentar serviço web (PHP-FPM + NGINX ou imagem Laravel) e proxy TLS no host.
+# Não expor Postgres/Redis à internet pública.
+
+services:
+  pgsql:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-revenue_share}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
+    networks:
+      - internal
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_DATABASE:-revenue_share}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ['redis-server', '--appendonly', 'yes']
+    volumes:
+      - redis_data:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  pgsql_data:
+  redis_data:

@@ -29,7 +29,7 @@ class BrokerLogin extends Component
         $throttleKey = 'login-broker:'.sha1(strtolower($this->email)).':'.request()->ip();
         if (RateLimiter::tooManyAttempts($throttleKey, 10)) {
             $seconds = RateLimiter::availableIn($throttleKey);
-            $this->addError('email', 'Demasiadas tentativas. Tenta novamente em '.$seconds.'s.');
+            $this->addError('email', 'Muitas tentativas. Tente novamente em '.$seconds.'s.');
 
             return;
         }

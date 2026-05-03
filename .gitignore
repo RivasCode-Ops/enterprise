@@ -1,8 +1,12 @@
+# Backup local (não versionar)
+apps/.rsc-phase1-backup/
+
 # Laravel app (monorepo)
 apps/revenue-share-corretores/vendor/
 apps/revenue-share-corretores/node_modules/
 apps/revenue-share-corretores/.env
 apps/revenue-share-corretores/.env.*
+!apps/revenue-share-corretores/.env.example
 apps/revenue-share-corretores/public/hot
 apps/revenue-share-corretores/public/build
 apps/revenue-share-corretores/storage/*.key

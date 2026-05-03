@@ -10,7 +10,7 @@
             @error('email') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
         </div>
         <div>
-            <label for="admin-password" class="block text-sm font-medium text-slate-300">Password</label>
+            <label for="admin-password" class="block text-sm font-medium text-slate-300">Senha</label>
             <input id="admin-password" type="password" wire:model="password" autocomplete="current-password"
                    class="mt-1 w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"/>
             @error('password') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror

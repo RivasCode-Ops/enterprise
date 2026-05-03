@@ -59,7 +59,7 @@ class PropertyShow extends Component
 
         $ipKey = 'lead-ip:' . request()->ip();
         if (RateLimiter::tooManyAttempts($ipKey, 20)) {
-            $this->addError('buyer_email', 'Demasiados envios a partir deste IP. Aguarda alguns minutos.');
+            $this->addError('buyer_email', 'Muitos envios a partir deste IP. Aguarde alguns minutos.');
 
             return;
         }

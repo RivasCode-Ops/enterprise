@@ -1,13 +1,13 @@
 <div>
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-slate-900">Vendas e pagamentos</h1>
-        <p class="mt-1 text-sm text-slate-600">Vendas registadas a partir de leads e comissões (split) pendentes ou pagas.</p>
+        <h1 class="text-2xl font-bold text-slate-900">Vendas e comissões</h1>
+        <p class="mt-1 text-sm text-slate-600">Vendas originadas de leads, com comissões pendentes de repasse ou já quitadas.</p>
     </div>
 
     <div class="mb-8">
-        <h2 class="mb-3 text-lg font-semibold text-slate-800">Pagamentos pendentes</h2>
+        <h2 class="mb-3 text-lg font-semibold text-slate-800">Repasses pendentes</h2>
         @if ($pendingPayments->isEmpty())
-            <p class="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600">Nenhum pagamento pendente.</p>
+            <p class="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600">Nenhum repasse pendente no momento.</p>
         @else
             <div class="overflow-x-auto rounded-xl border border-amber-200 bg-amber-50/50 shadow-sm">
                 <table class="min-w-full divide-y divide-amber-200 text-sm">
@@ -35,10 +35,10 @@
     </div>
 
     <div>
-        <h2 class="mb-3 text-lg font-semibold text-slate-800">Todas as vendas</h2>
+        <h2 class="mb-3 text-lg font-semibold text-slate-800">Histórico de vendas</h2>
         @if ($sales->isEmpty())
             <p class="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-slate-600">
-                Ainda não há vendas. Regista uma venda a partir de um lead em <a href="{{ route('broker.leads.index') }}" wire:navigate class="text-indigo-600 hover:underline">Leads</a>.
+                Nenhuma venda registrada. Registre a partir de um lead em <a href="{{ route('broker.leads.index') }}" wire:navigate class="text-indigo-600 hover:underline">Leads</a>.
             </p>
         @else
             <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
@@ -50,7 +50,7 @@
                         <th class="px-4 py-3 text-left font-semibold text-slate-700">Lead</th>
                         <th class="px-4 py-3 text-right font-semibold text-slate-700">Valor venda</th>
                         <th class="px-4 py-3 text-right font-semibold text-slate-700">Split %</th>
-                        <th class="px-4 py-3 text-right font-semibold text-slate-700">Revenue corretor</th>
+                        <th class="px-4 py-3 text-right font-semibold text-slate-700">Sua comissão</th>
                         <th class="px-4 py-3 text-left font-semibold text-slate-700">Pagamentos</th>
                     </tr>
                     </thead>

@@ -1,5 +1,7 @@
 # Segurança (MVP)
 
+**Reporte responsável de vulnerabilidades:** política do repositório em [`SECURITY.md`](../../../SECURITY.md) (raiz do monorepo).
+
 Este documento resume o estado atual e recomendações para endurecer o sistema antes de produção com tráfego real.
 
 ## Estado atual (MVP)

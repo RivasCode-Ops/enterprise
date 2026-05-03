@@ -1,28 +1,28 @@
 <div>
     <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-slate-900">Imóveis publicados</h1>
+            <h1 class="text-2xl font-bold text-slate-900">Meus anúncios</h1>
             <p class="mt-1 text-sm text-slate-600">{{ $broker->company_name }}</p>
         </div>
         <div class="flex flex-wrap gap-2">
             <a href="{{ route('broker.leads.index') }}" wire:navigate
                class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">
-                Ver leads
+                Leads
             </a>
             <a href="{{ route('broker.sales.index') }}" wire:navigate
                class="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">
-                Vendas
+                Vendas e comissões
             </a>
             <button type="button" wire:click="openCreate"
                     class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Novo imóvel
+                Novo anúncio
             </button>
         </div>
     </div>
 
     @if ($properties->isEmpty())
         <div class="rounded-lg border border-dashed border-slate-300 bg-white p-12 text-center">
-            <p class="text-slate-600">Ainda não há imóveis. Clique em «Novo imóvel» para publicar.</p>
+            <p class="text-slate-600">Você ainda não tem anúncios publicados. Use «Novo anúncio» para cadastrar um imóvel.</p>
         </div>
     @else
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -35,7 +35,7 @@
                         @if ($thumb)
                             <img src="{{ $thumb->url }}" alt="{{ $property->title }}" class="h-full w-full object-cover"/>
                         @else
-                            <div class="flex h-full items-center justify-center text-sm text-slate-400">Sem foto</div>
+                            <div class="flex h-full items-center justify-center text-sm text-slate-400">Sem imagem</div>
                         @endif
                     </div>
                     <div class="p-4">
@@ -47,9 +47,9 @@
                             <p class="mt-2 line-clamp-3 text-sm text-slate-600">{{ $property->description }}</p>
                         @endif
                         <p class="mt-2 text-xs text-slate-500">
-                            {{ $property->images->count() }} foto(s)
+                            {{ $property->images->count() }} imagem(ns)
                             @if ($thumb)
-                                · <a href="{{ $thumb->url }}" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">abrir em /storage/</a>
+                                · <a href="{{ $thumb->url }}" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">Abrir imagem</a>
                             @endif
                         </p>
                         <button type="button" wire:click="openEdit({{ $property->id }})"

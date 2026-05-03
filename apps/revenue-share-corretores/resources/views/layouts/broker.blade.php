@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'Corretor' }}</title>
+    <title>{{ $title ?? 'Área do corretor' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -12,13 +12,13 @@
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
             <nav class="flex flex-wrap items-center gap-4">
                 <a href="{{ route('broker.properties.index') }}" class="text-lg font-semibold text-slate-800" wire:navigate>
-                    Meus imóveis
+                    Meus anúncios
                 </a>
                 <a href="{{ route('broker.leads.index') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800" wire:navigate>
-                    Ver leads
+                    Leads
                 </a>
                 <a href="{{ route('broker.sales.index') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-800" wire:navigate>
-                    Vendas
+                    Vendas e comissões
                 </a>
             </nav>
             <form method="POST" action="{{ route('broker.logout') }}" class="inline">

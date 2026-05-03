@@ -1,14 +1,14 @@
 @push('meta-title')
-    <title>Imóveis publicados — {{ config('app.name', 'Laravel') }}</title>
+    <title>Imóveis disponíveis — {{ config('app.name', 'Laravel') }}</title>
 @endpush
 
 <div>
-    <h1 class="text-2xl font-bold text-slate-900">Imóveis publicados</h1>
-    <p class="mt-2 text-slate-600">Escolhe um imóvel para ver detalhes e enviar contacto ao corretor.</p>
+    <h1 class="text-2xl font-bold text-slate-900">Imóveis disponíveis</h1>
+    <p class="mt-2 text-slate-600">Confira os detalhes e solicite contato com o corretor responsável.</p>
 
     @if ($properties->isEmpty())
         <p class="mt-8 rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-slate-600">
-            Ainda não há imóveis publicados.
+            Não há imóveis publicados no momento. Volte em breve.
         </p>
     @else
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -21,7 +21,7 @@
                         @if ($thumb)
                             <img src="{{ $thumb->url }}" alt="" class="h-full w-full object-cover"/>
                         @else
-                            <div class="flex h-full items-center justify-center text-sm text-slate-400">Sem foto</div>
+                            <div class="flex h-full items-center justify-center text-sm text-slate-400">Sem imagem</div>
                         @endif
                     </div>
                     <div class="p-4">
@@ -32,7 +32,7 @@
                         @if ($property->city)
                             <p class="mt-1 text-sm text-slate-500">{{ $property->city }}{{ $property->state ? ', '.$property->state : '' }}</p>
                         @endif
-                        <span class="mt-3 inline-block text-sm font-medium text-indigo-600">Ver detalhes →</span>
+                        <span class="mt-3 inline-block text-sm font-medium text-indigo-600">Ver imóvel →</span>
                     </div>
                 </a>
             @endforeach

@@ -1,0 +1,112 @@
+---
+description: Contexto README/CONTEXT/HANDOFF por app, ai-kit, plano antes de código grande, comunicação em português.
+alwaysApply: true
+---
+
+# Projeto com CONTEXT.md, HANDOFF.md e fluxos de IA
+
+## Objetivo
+
+Este monorepo está organizado para trabalhar com IA de forma previsível usando:
+
+- `README.md` (raiz) → visão geral do repositório.
+- `CONTEXT.md` → estado atual por produto (Past / Current / Future), tipicamente em `apps/<produto>/CONTEXT.md`.
+- `HANDOFF.md` → último handoff de sessão por produto, quando existir.
+- `ai-kit/` → prompts e copies operacionais.
+- `.agents/skills/*/SKILL.md` → workflows padronizados **quando existirem** no clone (start-session, project-context, feature-implementation, bugfix, handoff).
+
+Use sempre essas fontes antes de decisões grandes. Em trabalhos dentro de um app, priorize o `README` e o `CONTEXT` **desse** `apps/<nome>/`.
+
+---
+
+## Como o agente deve trabalhar neste projeto
+
+### 1. Sempre começar pelo contexto
+
+Antes de sugerir plano ou editar código, siga esta ordem:
+
+1. Ler o `README.md` da raiz para entender o monorepo e, em seguida, o **README do produto** em `apps/…` em que for trabalhar.
+
+2. Ler o **`CONTEXT.md`** do âmbito correcto (por exemplo `apps/revenue-share-corretores/CONTEXT.md`):
+   - **Past** → por que o produto existe e o que já foi feito;
+   - **Current** → fase atual, foco, itens em andamento, bloqueios;
+   - **Future** → próximos passos e ideias futuras.
+
+3. Se existir e for relevante, ler o **`HANDOFF.md`** desse produto para continuidade:
+   - o que foi feito na última sessão;
+   - próximos passos imediatos;
+   - riscos e bloqueios.
+
+Depois disso, faça um **resumo curto** do contexto antes de propor mudanças.
+
+---
+
+### 2. Skills e ai-kit como workflows
+
+Quando existirem skills em `.agents/skills/`, trate cada `SKILL.md` como playbook (entender → planejar → executar → verificar → documentar).
+
+Indicações típicas (ajuste os caminhos se a pasta existir):
+
+- Início de sessão mais longa → `./.agents/skills/start-session/SKILL.md`
+- Estado do projeto → `./.agents/skills/project-context/SKILL.md`
+- Nova feature → `./.agents/skills/feature-implementation/SKILL.md`
+- Bugfix → `./.agents/skills/bugfix/SKILL.md`
+- Handoff → `./.agents/skills/handoff/SKILL.md`
+
+Complemente com `ai-kit/Prompts.md` e, no Cursor, `Cursor.md` na raiz do repo.
+
+---
+
+### 3. Plano antes de código
+
+Para tarefas que envolvem vários ficheiros:
+
+1. Propor um plano claro e numerado: quais ficheiros ler, quais alterar, objectivo de cada passo.
+2. Pedir confirmação antes de mudanças grandes ou estruturais.
+
+Use o **Plan Mode** do Cursor quando fizer sentido para explorar e planear antes de editar.
+
+---
+
+### 4. Estilo de código e comandos
+
+- Seguir o estilo dos ficheiros mais recentes **do mesmo produto/pasta**.
+- Preferir mudanças pequenas e localizadas; evitar refactors não pedidos.
+- Sugerir comandos de teste/check definidos no README do app (ex.: Laravel: `php artisan test`, `php scripts/verify-mvp-e2e.php`; Node: `npm test`, conforme o projeto).
+
+Não introduzir ferramentas ou mudanças estruturais novas sem explicar impacto e plano incremental.
+
+---
+
+### 5. Verificação e segurança
+
+- Indicar como verificar a mudança (rota, comando, cenário).
+- Apontar efeitos laterais possíveis.
+- Em auth, base de dados ou migrations: ser conservador; **não** aplicar migrations ou alterações destrutivas sem revisão explícita do utilizador; preferir ambiente de desenvolvimento primeiro.
+
+---
+
+### 6. CONTEXT.md e HANDOFF.md
+
+- Se o pedido estiver desalinhado do «Foco atual» do `CONTEXT.md`, assinalar e perguntar se deve mudar o foco ou se a tarefa é exceção pontual.
+- Ao terminar sessão com mudanças relevantes: sugerir atualização do `CONTEXT.md` (Current/Future) e um bloco para `HANDOFF.md` (estado, trabalho feito, decisões, próximos passos, riscos). Modelo: `docs/HANDOFF-template.md`.
+
+---
+
+### 7. Comunicação
+
+- Responder em **português**.
+- Ser directo; código sugerido completo e justificado em poucas frases.
+- Evitar mudar muitas coisas de uma vez sem necessidade.
+
+---
+
+## Resumo operacional
+
+1. README raiz + README do app → entender âmbito.
+2. `CONTEXT.md` do produto → estado atual.
+3. `HANDOFF.md` do produto se for continuidade.
+4. Skill em `.agents/skills` ou prompt em `ai-kit/` conforme a tarefa.
+5. Plano curto → confirmação se mudança grande.
+6. Implementar em passos pequenos + verificação.
+7. Ao encerrar: sugerir atualização de `CONTEXT.md` + texto para `HANDOFF.md`.

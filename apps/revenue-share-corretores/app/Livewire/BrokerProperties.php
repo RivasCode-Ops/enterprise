@@ -11,7 +11,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.broker')]
-#[Title('Meus imóveis')]
+#[Title('Meus anúncios')]
 class BrokerProperties extends Component
 {
     public bool $showModal = false;

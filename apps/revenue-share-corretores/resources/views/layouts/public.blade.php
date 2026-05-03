@@ -14,8 +14,8 @@
                 {{ config('app.name', 'Imóveis') }}
             </a>
             <nav class="flex items-center gap-4 text-sm">
-                <a href="{{ route('home') }}" class="text-slate-600 hover:text-slate-900" wire:navigate>Listagem</a>
-                <a href="{{ route('broker.login') }}" class="text-indigo-600 hover:text-indigo-800">Área corretor</a>
+                <a href="{{ route('home') }}" class="text-slate-600 hover:text-slate-900" wire:navigate>Imóveis</a>
+                <a href="{{ route('broker.login') }}" class="text-indigo-600 hover:text-indigo-800">Área do corretor</a>
             </nav>
         </div>
     </header>

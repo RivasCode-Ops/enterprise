@@ -1,15 +1,15 @@
 @push('meta-title')
-    <title>{{ $property->title }} — Contacto | {{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $property->title }} — Informações | {{ config('app.name', 'Laravel') }}</title>
 @endpush
 
 <div>
     <nav class="mb-6 text-sm text-slate-600">
-        <a href="{{ route('home') }}" class="text-indigo-600 hover:underline" wire:navigate>← Voltar à listagem</a>
+        <a href="{{ route('home') }}" class="text-indigo-600 hover:underline" wire:navigate>← Voltar aos imóveis</a>
     </nav>
 
     @if (session('lead_sent'))
         <div class="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800" role="alert">
-            Pedido enviado com sucesso. O corretor entrará em contacto brevemente.
+            Mensagem enviada com sucesso. O corretor retornará o contato em breve.
         </div>
     @endif
 
@@ -43,9 +43,10 @@
         </div>
 
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 class="text-lg font-semibold text-slate-900">Pedir informações</h2>
+            <h2 class="text-lg font-semibold text-slate-900">Solicitar informações</h2>
             <p class="mt-1 text-sm text-slate-600">
-                Dados enviados ao corretor responsável ({{ $property->broker->company_name ?? 'Imobiliária' }}).
+                Seus dados são enviados diretamente ao corretor:
+                <span class="font-medium text-slate-800">{{ $property->broker->company_name ?? 'Imobiliária' }}</span>.
             </p>
 
             <form wire:submit="submitLead" class="mt-6 space-y-4">
@@ -56,7 +57,7 @@
                     @error('buyer_name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700">Email</label>
+                    <label class="block text-sm font-medium text-slate-700">E-mail</label>
                     <input type="email" wire:model="buyer_email" autocomplete="email"
                            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"/>
                     @error('buyer_email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
@@ -68,7 +69,7 @@
                     @error('buyer_phone') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700">Mensagem</label>
+                    <label class="block text-sm font-medium text-slate-700">Mensagem (opcional)</label>
                     <textarea wire:model="message" rows="4"
                               class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"></textarea>
                     @error('message') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
@@ -77,15 +78,15 @@
                     <label class="flex cursor-pointer items-start gap-2 text-sm text-slate-700">
                         <input type="checkbox" wire:model="buyer_consent" class="mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"/>
                         <span>
-                            Aceito o tratamento dos meus dados pessoais para este pedido de contacto, nos termos descritos em
-                            <code class="rounded bg-slate-100 px-1 text-xs">docs/lgpd-retention.md</code> (retenção e direitos LGPD).
+                            Declaro que li e aceito a política de privacidade e o tratamento dos meus dados para este contato,
+                            em conformidade com a LGPD (Lei Geral de Proteção de Dados).
                         </span>
                     </label>
                     @error('buyer_consent') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
                 </div>
                 <button type="submit"
                         class="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    Enviar pedido
+                    Enviar solicitação
                 </button>
             </form>
         </div>

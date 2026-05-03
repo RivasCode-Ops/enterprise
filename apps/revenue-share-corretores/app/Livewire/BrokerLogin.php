@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.guest')]
-#[Title('Login — Corretor')]
+#[Title('Entrar — Corretor')]
 class BrokerLogin extends Component
 {
     public string $email = '';

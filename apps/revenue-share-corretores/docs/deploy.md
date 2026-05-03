@@ -69,7 +69,7 @@ git push origin main
 | `SESSION_DRIVER` | `redis` (recomendado com `REDIS_URL`; senão mantém `database`.) |
 | `LOG_CHANNEL` | `stderr` ou `stack` (útil em PaaS). |
 
-Credenciais demo (seed): após deploy, `admin@demo.local` / `password` e `corretor@demo.local` / `password` — **rota ou remove em produção real.**
+Credenciais demo (apenas depois de `php artisan db:seed --force`): `admin@demo.local` / `password` e `corretor@demo.local` / `password` — **não usar em produção final com clientes reais.**
 
 ### 5. Build e start (automático via `railway.toml`)
 
@@ -77,9 +77,34 @@ Credenciais demo (seed): após deploy, `admin@demo.local` / `password` e `corret
   1. `composer install --no-dev --optimize-autoloader --no-interaction`
   2. `npm ci`
   3. `npm run build`
-- **Start:** migrações + seed demo + `storage:link` + `php artisan serve` na porta `$PORT` (adequado ao MVP; para tráfego alto, migrar para Octane / PHP-FPM + proxy).
+- **Start (produção):** `migrate --force` + `storage:link` + `php artisan serve` na porta `$PORT` — **sem** `db:seed` em cada arranque (dados demo só quando necessário; ver § abaixo).
 
 Se alterares comandos, edita [`railway.toml`](../railway.toml) ou os overrides no painel **Settings → Build / Deploy**.
+
+#### Seed opcional (demo / teste E2E no URL público)
+
+Para ter imóvel `apartamento-demo` e utilizadores demo **uma vez** no Postgres de Railway:
+
+1. Serviço Web → **Deployments** → menu do pod → **Shell** (ou Railway CLI).
+2. Na shell do contentor (directório da app já definido pelo Root Directory):
+
+```bash
+php artisan db:seed --force
+```
+
+Isto corre `DatabaseSeeder` (corretor/admin demo). **Não uses em produção final** com utilizadores reais — apenas smoke test ou staging.
+
+### Checklist rápido — `RivasCode-Ops/enterprise` → Railway produção
+
+| Passo | Acção |
+| :--- | :--- |
+| Repo | GitHub `https://github.com/RivasCode-Ops/enterprise` |
+| Root Directory | `apps/revenue-share-corretores` |
+| Serviços | Postgres + Redis ligados ao Web; variáveis `DATABASE_URL`, `REDIS_URL` |
+| Segredo | `APP_KEY` (local: `php artisan key:generate --show`), **nunca** no Git |
+| App | `APP_ENV=production`, `APP_DEBUG=false`, `DB_CONNECTION=pgsql`, `APP_URL=https://…`, `CACHE_STORE=redis`, `SESSION_DRIVER=redis` |
+| Deploy | Push em `main` → build OK → health `/` = 200 |
+| E2E URL | Após seed opcional: abrir `https://<teu-dominio>/properties/apartamento-demo` e fluxo §10 |
 
 ### 6. Nixpacks / deteção Laravel
 

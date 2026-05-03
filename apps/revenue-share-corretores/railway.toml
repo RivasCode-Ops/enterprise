@@ -6,7 +6,8 @@ builder = "nixpacks"
 # Equivalente a: composer install --no-dev --optimize-autoloader; npm ci; npm run build
 buildCommand = "composer install --no-dev --optimize-autoloader --no-interaction && npm ci && npm run build"
 
+# Produção: sem seed automático (evita dados demo a cada restart). Para dados demo uma vez: Railway Shell → php artisan db:seed --force
 [deploy]
-startCommand = "/bin/sh -c 'php artisan migrate --force && php artisan db:seed --force && php artisan storage:link 2>/dev/null || true && exec php artisan serve --host=0.0.0.0 --port=$PORT'"
+startCommand = "/bin/sh -c 'php artisan migrate --force && php artisan storage:link 2>/dev/null || true && exec php artisan serve --host=0.0.0.0 --port=$PORT'"
 healthcheckPath = "/"
 healthcheckTimeout = 120
